@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Tools - Keshav</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ... (Previous sections like login, merge, etc. remain unchanged) ... -->
+
+        <!-- PDF Compression Section -->
+        <h2>Compress PDF</h2>
+        <div class="upload-area" id="compressDropZone">
+            <p>Upload a PDF to compress</p>
+            <input type="file" id="compressInput" accept=".pdf" hidden>
+        </div>
+        <div id="compressPreview" style="display: none; margin: 20px 0;">
+            <p><strong>Original Size:</strong> <span id="originalSize"></span></p>
+            <p><strong>Compressed Size:</strong> <span id="compressedSize"></span></p>
+        </div>
+        <button id="compressButton" disabled>Compress PDF</button>
+        <a id="compressDownloadLink" style="display: none;">Download Compressed PDF</a>
+
+        <!-- ... (Passport photo section, admin panel, footer remain unchanged) ... -->
+    </div>
+
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
