@@ -1,7 +1,6 @@
 const { PDFDocument } = PDFLib;
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Elements
     const dropZone = document.getElementById('dropZone');
     const fileInput = document.getElementById('fileInput');
     const fileList = document.getElementById('fileList');
@@ -46,10 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let compressFile = null;
     let imageFile = null;
     let croppedImage = null;
-    let users = { 'admin': { password: 'admin123', role: 'admin' } };
+    let users = { 'admin': { password: 'admin123', role: 'admin' } }; // In-memory storage
     let currentUser = null;
 
-    // PDF Merge Handling
+    // PDF Merge
     dropZone.addEventListener('click', () => fileInput.click());
     dropZone.addEventListener('dragover', (e) => e.preventDefault());
     dropZone.addEventListener('drop', (e) => {
@@ -91,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         downloadLink.style.display = 'block';
     });
 
-    // PDF Compression Handling
+    // PDF Compression
     compressDropZone.addEventListener('click', () => compressInput.click());
     compressDropZone.addEventListener('dragover', (e) => e.preventDefault());
     compressDropZone.addEventListener('drop', (e) => {
@@ -113,19 +112,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     compressButton.addEventListener('click', async () => {
         if (!compressFile) return;
-
         const arrayBuffer = await compressFile.arrayBuffer();
         const pdfDoc = await PDFDocument.load(arrayBuffer);
-        
-        // Basic compression: Re-save with minimal optimizations
         const compressedPdfBytes = await pdfDoc.save({ useObjectStreams: false });
-        
         const blob = new Blob([compressedPdfBytes], { type: 'application/pdf' });
         const url = URL.createObjectURL(blob);
-        
-        // Update preview with compressed size
         compressedSize.textContent = formatSize(compressedPdfBytes.length);
-        
         compressDownloadLink.href = url;
         compressDownloadLink.download = 'compressed.pdf';
         compressDownloadLink.textContent = 'Download Compressed PDF';
@@ -138,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
     }
 
-    // Passport Photo Handling
+    // Passport Photo Converter
     imageDropZone.addEventListener('click', () => imageInput.click());
     imageDropZone.addEventListener('dragover', (e) => e.preventDefault());
     imageDropZone.addEventListener('drop', (e) => {
@@ -182,7 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     convertButton.addEventListener('click', async () => {
         if (!imageFile && !croppedImage) return;
-
         const format = outputFormat.value;
         const count = parseInt(photoCount.value);
         const sizes = {
@@ -234,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // User Login/Register Handling
+    // Login/Register (In-memory)
     loginButton.addEventListener('click', () => {
         const user = username.value;
         const pass = password.value;
@@ -279,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loginSection.style.display = 'block';
     });
 
-    // Admin Panel Handling
+    // Admin Panel
     adminButton.style.display = 'none';
     adminButton.addEventListener('click', () => {
         adminModal.style.display = 'block';
