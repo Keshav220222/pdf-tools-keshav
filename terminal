@@ -1,6 +1,6 @@
 cd pdf-tools-keshav
-git init
+git init  # Skip if already a repo
 git add .
-git commit -m "Initial commit"
-git remote add origin https://github.com/<your-username>/pdf-tools-keshav.git
-git push -u origin main
+git commit -m "Uploaded updated PDF Tools with premium interface"
+git remote add origin https://github.com/<your-username>/pdf-tools-keshav.git  # Skip if already linked
+git push origin main
