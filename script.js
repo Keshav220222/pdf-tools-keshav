@@ -27,6 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeModal = document.getElementById('closeModal');
     const lastLogin = document.getElementById('lastLogin');
     const userList = document.getElementById('userList');
+    const authModal = document.getElementById('authModal');
+    const closeAuthModal = document.getElementById('closeAuthModal');
+    const authToggle = document.getElementById('authToggle');
     const loginSection = document.getElementById('loginSection');
     const registerSection = document.getElementById('registerSection');
     const userPanel = document.getElementById('userPanel');
@@ -45,8 +48,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let compressFile = null;
     let imageFile = null;
     let croppedImage = null;
-    let users = { 'admin': { password: 'admin123', role: 'admin' } }; // In-memory storage
+    let users = { 'admin': { password: 'admin123', role: 'admin' } };
     let currentUser = null;
+
+    // Toggle Auth Modal
+    authToggle.addEventListener('click', () => {
+        authModal.style.display = 'block';
+    });
 
     // PDF Merge
     dropZone.addEventListener('click', () => fileInput.click());
@@ -225,16 +233,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Login/Register (In-memory)
+    // Login/Register
     loginButton.addEventListener('click', () => {
         const user = username.value;
         const pass = password.value;
         if (users[user] && users[user].password === pass) {
             currentUser = user;
-            loginSection.style.display = 'none';
+            authModal.style.display = 'none';
             userPanel.style.display = 'block';
             userNameDisplay.textContent = user;
             if (user === 'admin') adminButton.style.display = 'block';
+            authToggle.style.display = 'none';
         } else {
             alert('Invalid credentials');
         }
@@ -256,8 +265,9 @@ document.addEventListener('DOMContentLoaded', () => {
     logoutButton.addEventListener('click', () => {
         currentUser = null;
         userPanel.style.display = 'none';
-        loginSection.style.display = 'block';
+        authModal.style.display = 'block';
         adminButton.style.display = 'none';
+        authToggle.style.display = 'block';
     });
 
     showRegister.addEventListener('click', () => {
@@ -270,8 +280,15 @@ document.addEventListener('DOMContentLoaded', () => {
         loginSection.style.display = 'block';
     });
 
+    closeAuthModal.addEventListener('click', () => {
+        authModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === authModal) authModal.style.display = 'none';
+    });
+
     // Admin Panel
-    adminButton.style.display = 'none';
     adminButton.addEventListener('click', () => {
         adminModal.style.display = 'block';
         lastLogin.textContent = new Date().toLocaleString();
@@ -287,4 +304,4 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('click', (e) => {
         if (e.target === adminModal) adminModal.style.display = 'none';
     });
-});
+});            
