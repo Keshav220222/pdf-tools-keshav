@@ -1,4 +1,5 @@
-cd pdf-tools-keshav
+git init
+git remote add origin https://github.com/<keshav220222>/pdf-tools-keshav.git
 git add .
-git commit -m "Added fully loaded tools and admin panel, removed login"
-git push origin main
+git commit -m "Initial commit with fully loaded tools"
+git push -u origin main
