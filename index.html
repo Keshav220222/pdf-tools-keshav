@@ -11,14 +11,8 @@
 <body>
     <!-- Hero Section -->
     <header class="hero">
-        <nav>
-            <h1>PDF Tools</h1>
-            <button id="authToggle" class="auth-btn">Login / Register</button>
-        </nav>
-        <div class="hero-content">
-            <h2>Simplify Your PDF Tasks</h2>
-            <p>Merge, compress, and convert with ease—all in one place.</p>
-        </div>
+        <h1>PDF Tools</h1>
+        <p>All-in-one solution for your PDF needs</p>
     </header>
 
     <!-- Main Container -->
@@ -29,55 +23,27 @@
             <div class="ad-placeholder">Ad Placeholder (300x100)</div>
         </div>
 
-        <!-- Login/Register Modal -->
-        <div id="authModal" class="modal">
-            <div class="modal-content auth-modal">
-                <span id="closeAuthModal" class="close">&times;</span>
-                <div id="loginSection">
-                    <h3>Login</h3>
-                    <form>
-                        <input type="text" id="username" placeholder="Username" required>
-                        <input type="password" id="password" placeholder="Password" required>
-                        <button type="button" id="loginButton">Login</button>
-                    </form>
-                    <p>Need an account? <a href="#" id="showRegister">Register</a></p>
-                </div>
-                <div id="registerSection" style="display: none;">
-                    <h3>Register</h3>
-                    <form>
-                        <input type="text" id="regUsername" placeholder="Username" required>
-                        <input type="password" id="regPassword" placeholder="Password" required>
-                        <button type="button" id="registerButton">Register</button>
-                    </form>
-                    <p>Have an account? <a href="#" id="showLogin">Login</a></p>
-                </div>
-            </div>
-        </div>
-
-        <!-- User Panel -->
-        <div id="userPanel" class="user-panel" style="display: none;">
-            <p>Hello, <span id="userNameDisplay"></span>! <button id="logoutButton" class="logout-btn">Logout</button></p>
-        </div>
-
         <!-- Tools Section -->
         <section class="tools">
-            <h3>Our Tools</h3>
+            <h2>Explore Our Tools</h2>
             <div class="tools-grid">
+                <!-- Merge PDFs -->
                 <div class="tool-card">
                     <i class="fas fa-file-pdf"></i>
-                    <h4>Merge PDFs</h4>
-                    <div class="upload-area" id="dropZone">
+                    <h3>Merge PDFs</h3>
+                    <div class="upload-area" id="mergeDropZone">
                         <p>Drop PDFs or click to upload</p>
-                        <input type="file" id="fileInput" multiple accept=".pdf" hidden>
+                        <input type="file" id="mergeInput" multiple accept=".pdf" hidden>
                     </div>
-                    <div id="fileList"></div>
+                    <div id="mergeFileList"></div>
                     <button id="mergeButton" disabled>Merge Now</button>
-                    <a id="downloadLink" style="display: none;">Download Merged PDF</a>
+                    <a id="mergeDownloadLink" style="display: none;">Download Merged PDF</a>
                 </div>
 
+                <!-- Compress PDF -->
                 <div class="tool-card">
                     <i class="fas fa-compress"></i>
-                    <h4>Compress PDF</h4>
+                    <h3>Compress PDF</h3>
                     <div class="upload-area" id="compressDropZone">
                         <p>Upload PDF to compress</p>
                         <input type="file" id="compressInput" accept=".pdf" hidden>
@@ -90,9 +56,65 @@
                     <a id="compressDownloadLink" style="display: none;">Download Compressed PDF</a>
                 </div>
 
+                <!-- Split PDF -->
+                <div class="tool-card">
+                    <i class="fas fa-cut"></i>
+                    <h3>Split PDF</h3>
+                    <div class="upload-area" id="splitDropZone">
+                        <p>Upload PDF to split</p>
+                        <input type="file" id="splitInput" accept=".pdf" hidden>
+                    </div>
+                    <input type="number" id="splitPage" min="1" placeholder="Split after page">
+                    <button id="splitButton" disabled>Split Now</button>
+                    <a id="splitDownloadLink" style="display: none;">Download Split PDFs</a>
+                </div>
+
+                <!-- Rotate PDF -->
+                <div class="tool-card">
+                    <i class="fas fa-sync-alt"></i>
+                    <h3>Rotate PDF</h3>
+                    <div class="upload-area" id="rotateDropZone">
+                        <p>Upload PDF to rotate</p>
+                        <input type="file" id="rotateInput" accept=".pdf" hidden>
+                    </div>
+                    <select id="rotateAngle">
+                        <option value="90">90° Clockwise</option>
+                        <option value="180">180°</option>
+                        <option value="270">90° Counterclockwise</option>
+                    </select>
+                    <button id="rotateButton" disabled>Rotate Now</button>
+                    <a id="rotateDownloadLink" style="display: none;">Download Rotated PDF</a>
+                </div>
+
+                <!-- JPG to PDF -->
+                <div class="tool-card">
+                    <i class="fas fa-image"></i>
+                    <h3>JPG to PDF</h3>
+                    <div class="upload-area" id="jpgToPdfDropZone">
+                        <p>Upload JPG images</p>
+                        <input type="file" id="jpgToPdfInput" multiple accept="image/jpeg,image/png" hidden>
+                    </div>
+                    <div id="jpgToPdfFileList"></div>
+                    <button id="jpgToPdfButton" disabled>Convert Now</button>
+                    <a id="jpgToPdfDownloadLink" style="display: none;">Download PDF</a>
+                </div>
+
+                <!-- PDF to JPG -->
+                <div class="tool-card">
+                    <i class="fas fa-file-image"></i>
+                    <h3>PDF to JPG</h3>
+                    <div class="upload-area" id="pdfToJpgDropZone">
+                        <p>Upload PDF</p>
+                        <input type="file" id="pdfToJpgInput" accept=".pdf" hidden>
+                    </div>
+                    <button id="pdfToJpgButton" disabled>Convert Now</button>
+                    <a id="pdfToJpgDownloadLink" style="display: none;">Download JPGs</a>
+                </div>
+
+                <!-- Passport Photo -->
                 <div class="tool-card">
                     <i class="fas fa-camera"></i>
-                    <h4>Passport Photo</h4>
+                    <h3>Passport Photo</h3>
                     <div class="upload-area" id="imageDropZone">
                         <p>Upload image</p>
                         <input type="file" id="imageInput" accept="image/*" hidden>
@@ -105,7 +127,7 @@
                             <option value="us">US (2 x 2 in)</option>
                             <option value="uk">UK (35 x 45 mm)</option>
                         </select>
-                        <input type="number" id="photoCount" min="1" max="10" value="1" placeholder="Photos">
+                        <input type="number" id="photoCount" min="1" max="10" value="1">
                         <select id="outputFormat">
                             <option value="pdf">PDF</option>
                             <option value="jpg">JPG</option>
@@ -118,26 +140,29 @@
             </div>
         </section>
 
-        <button id="adminButton" class="admin-btn" style="display: none;">Admin Panel</button>
-    </main>
-
-    <!-- Admin Panel Modal -->
-    <div id="adminModal" class="modal">
-        <div class="modal-content">
-            <span id="closeModal" class="close">&times;</span>
-            <h3>Admin Panel</h3>
-            <p><strong>Name:</strong> Keshav Jha</p>
-            <p><strong>Email:</strong> keshavjha438@gmail.com</p>
-            <p><strong>Role:</strong> Administrator</p>
-            <p><strong>Last Login:</strong> <span id="lastLogin"></span></p>
-            <h4>Registered Users</h4>
-            <ul id="userList"></ul>
+        <!-- Admin Panel Trigger (Hidden) -->
+        <div class="admin-trigger">
+            <input type="password" id="adminPassword" placeholder="Admin Password">
+            <button id="adminToggle">Access Admin</button>
         </div>
-    </div>
+
+        <!-- Admin Panel Modal -->
+        <div id="adminModal" class="modal">
+            <div class="modal-content">
+                <span id="closeModal" class="close">×</span>
+                <h3>Admin Panel</h3>
+                <p><strong>Name:</strong> Keshav Jha</p>
+                <p><strong>Email:</strong> keshavjha438@gmail.com</p>
+                <p><strong>Role:</strong> Administrator</p>
+                <p><strong>Last Access:</strong> <span id="lastLogin"></span></p>
+                <p><strong>Usage Stats:</strong> Coming soon...</p>
+            </div>
+        </div>
+    </main>
 
     <!-- Footer -->
     <footer>
-        <p>© 2025 Keshav Jha. All rights reserved. Data stored locally, not shared.</p>
+        <p>© 2025 Keshav Jha. All rights reserved. Data processed locally.</p>
         <a href="#rules">Rules</a>
     </footer>
 
